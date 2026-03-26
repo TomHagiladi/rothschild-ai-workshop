@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סדנת AI למחקר וכתיבה אקדמית | תום הגלעדי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-primary: #4EA83B;
+            --green-dark: #3D8A2F;
+            --green-light: #E8F5E4;
+            --green-glow: rgba(78, 168, 59, 0.15);
+            --red-accent: #9B1B30;
+            --red-light: #FDF0F2;
+            --gray-dark: #333333;
+            --gray-medium: #555555;
+            --gray-light: #888888;
+            --bg-main: #FAFBFC;
+            --bg-card: #FFFFFF;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-main);
+            color: var(--gray-dark);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--green-light) 50%, #FEF9F0 100%);
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, var(--green-glow) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 30%, rgba(155, 27, 48, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            max-width: 280px;
+            margin: 0 auto 2rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .hero h1 span {
+            color: var(--green-primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-medium);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--green-primary);
+            color: var(--green-dark);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--red-accent);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ===== NOTICE ===== */
+        .notice {
+            max-width: 900px;
+            margin: -2rem auto 2rem;
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(135deg, var(--red-light) 0%, #FFF5F6 100%);
+            border: 1px solid rgba(155, 27, 48, 0.15);
+            border-right: 4px solid var(--red-accent);
+            border-radius: var(--radius-sm);
+            position: relative;
+            z-index: 2;
+        }
+
+        .notice p {
+            font-size: 0.95rem;
+            color: var(--gray-dark);
+        }
+
+        .notice strong {
+            color: var(--red-accent);
+        }
+
+        .notice .notice-icon {
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== NAV ===== */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding: 0.75rem 1rem;
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-btn {
+            flex-shrink: 0;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid #E0E0E0;
+            background: var(--bg-card);
+            color: var(--gray-medium);
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--green-primary);
+            color: white;
+            border-color: var(--green-primary);
+            box-shadow: 0 2px 8px var(--green-glow);
+        }
+
+        .nav-btn.part2 {
+            border-color: var(--red-accent);
+            color: var(--red-accent);
+        }
+
+        .nav-btn.part2:hover, .nav-btn.part2.active {
+            background: var(--red-accent);
+            color: white;
+            border-color: var(--red-accent);
+        }
+
+        /* ===== MAIN ===== */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ===== PART HEADER ===== */
+        .part-header {
+            margin: 3rem 0 2rem;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            position: relative;
+        }
+
+        .part-header.part1 {
+            background: linear-gradient(135deg, var(--green-light) 0%, #F0FAF0 100%);
+            border: 1px solid rgba(78, 168, 59, 0.2);
+        }
+
+        .part-header.part2 {
+            background: linear-gradient(135deg, var(--red-light) 0%, #FFF5F6 100%);
+            border: 1px solid rgba(155, 27, 48, 0.15);
+        }
+
+        .part-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 0.75rem;
+        }
+
+        .part1 .part-label {
+            background: var(--green-primary);
+            color: white;
+        }
+
+        .part2 .part-label {
+            background: var(--red-accent);
+            color: white;
+        }
+
+        .part-header h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+
+        .part-header p {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--gray-medium);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== EXERCISE CARD ===== */
+        .exercise {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .exercise:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .exercise-header {
+            padding: 1.5rem 2rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            user-select: none;
+        }
+
+        .exercise-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rubik', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .part1-card .exercise-number {
+            background: var(--green-light);
+            color: var(--green-primary);
+        }
+
+        .part2-card .exercise-number {
+            background: var(--red-light);
+            color: var(--red-accent);
+        }
+
+        .exercise-title {
+            flex: 1;
+        }
+
+        .exercise-title h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+            line-height: 1.4;
+        }
+
+        .exercise-title .tool-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.15rem 0.6rem;
+            border-radius: 50px;
+            margin-top: 0.3rem;
+        }
+
+        .part1-card .tool-tag {
+            background: var(--green-light);
+            color: var(--green-dark);
+        }
+
+        .part2-card .tool-tag {
+            background: var(--red-light);
+            color: var(--red-accent);
+        }
+
+        .toggle-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            font-size: 1rem;
+            color: var(--gray-light);
+        }
+
+        .exercise.open .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .exercise-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .exercise.open .exercise-body {
+            max-height: 5000px;
+        }
+
+        .exercise-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .mission-box {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .part1-card .mission-box {
+            background: var(--green-light);
+            border-right: 3px solid var(--green-primary);
+        }
+
+        .part2-card .mission-box {
+            background: var(--red-light);
+            border-right: 3px solid var(--red-accent);
+        }
+
+        .mission-box .mission-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .part1-card .mission-label { color: var(--green-dark); }
+        .part2-card .mission-label { color: var(--red-accent); }
+
+        /* ===== STEPS ===== */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 1rem 0 1rem 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .steps li:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.75rem;
+            flex-shrink: 0;
+            vertical-align: top;
+        }
+
+        .part1-card .step-number {
+            background: var(--green-light);
+            color: var(--green-primary);
+        }
+
+        .part2-card .step-number {
+            background: var(--red-light);
+            color: var(--red-accent);
+        }
+
+        .step-content {
+            display: inline;
+        }
+
+        /* ===== PROMPT BOX ===== */
+        .prompt-box {
+            background: #1E1E2E;
+            color: #CDD6F4;
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.9;
+            direction: rtl;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .prompt-box::before {
+            content: 'PROMPT';
+            position: absolute;
+            top: 0.5rem;
+            left: 0.75rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #585B70;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .prompt-box .highlight {
+            color: #A6E3A1;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.75rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #CDD6F4;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* ===== SUB-STEPS ===== */
+        .sub-steps {
+            list-style: none;
+            padding: 0.5rem 0 0 0;
+            margin: 0;
+        }
+
+        .sub-steps li {
+            padding: 0.4rem 1.5rem 0.4rem 0;
+            position: relative;
+            border-bottom: none;
+        }
+
+        .sub-steps li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0.9rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gray-light);
+        }
+
+        /* ===== INFO BOX ===== */
+        .info-box {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-sm);
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .info-box.tip {
+            background: #FFF8E1;
+            border-right: 3px solid #FFA726;
+        }
+
+        .info-box.warning {
+            background: var(--red-light);
+            border-right: 3px solid var(--red-accent);
+        }
+
+        .info-box.info {
+            background: #E3F2FD;
+            border-right: 3px solid #42A5F5;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ===== WORKFLOW ===== */
+        .workflow-stages {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .workflow-stage {
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid #E0E0E0;
+            position: relative;
+        }
+
+        .workflow-stage::after {
+            content: '▼';
+            position: absolute;
+            bottom: -1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+
+        .workflow-stage:last-child::after {
+            display: none;
+        }
+
+        .stage-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .part2-card .stage-label { color: var(--red-accent); }
+
+        .stage-tool {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .part2-card .stage-tool {
+            background: var(--red-light);
+            color: var(--red-accent);
+        }
+
+        .stage-goal {
+            font-size: 0.85rem;
+            color: var(--gray-medium);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== EXPORT FORMATS ===== */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .format-item {
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            background: #F5F5F5;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .format-item .format-ext {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--gray-dark);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--green-primary);
+            text-decoration: none;
+        }
+
+        .footer .footer-logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        /* ===== QUOTE ===== */
+        .quote-box {
+            text-align: center;
+            padding: 1.5rem;
+            margin: 1rem 0 2rem;
+            font-size: 0.95rem;
+            color: var(--gray-medium);
+            font-style: italic;
+            border-top: 1px solid #E0E0E0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .hero { padding: 2rem 1.25rem 3rem; }
+            .logo { max-width: 200px; }
+            .main-content { padding: 1.5rem 1rem 3rem; }
+            .exercise-header { padding: 1.25rem 1.25rem 0.75rem; }
+            .exercise-content { padding: 0 1.25rem 1.5rem; }
+            .prompt-box { font-size: 0.82rem; padding: 1rem 1rem 1rem 1rem; }
+            .nav-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .part-header { padding: 1.5rem; }
+            .part-header h2 { font-size: 1.2rem; }
+            .format-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .exercise {
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SCROLL MARGIN ===== */
+        [id] {
+            scroll-margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <img src="logo.png" alt="Tom Hagiladi - Empowering through AI" class="logo">
+        <h1>מדריך מעשי: כלי <span>AI</span> למחקר, כתיבה והצגה אקדמית</h1>
+        <p class="hero-subtitle">סדנה מעשית לדוקטורנטיות קרן אדמונד דה רוטשילד</p>
+        <div class="hero-badge">
+            <span class="dot"></span>
+            מומלץ לבחור התנסות אחת ולהתמקד בה
+        </div>
+    </div>
+</header>
+
+<!-- NOTICE -->
+<div class="notice">
+    <p><span class="notice-icon">&#9888;</span> <strong>הערה חשובה:</strong> כלי הבינה המלאכותית הם עזרי מחקר רבי עוצמה, אך האחריות הבלעדית על נכונות המידע, אימות המקורות ואיתור וביקורת על הזיות חלה עליכן כחוקרות.</p>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="nav-sticky">
+    <div class="nav-inner">
+        <a href="#part1" class="nav-btn active" onclick="setActive(this)">חלק א׳</a>
+        <a href="#canvas" class="nav-btn" onclick="setActive(this)">Canvas</a>
+        <a href="#gems" class="nav-btn" onclick="setActive(this)">Gems</a>
+        <a href="#deep-research" class="nav-btn" onclick="setActive(this)">Deep Research</a>
+        <a href="#notebooklm" class="nav-btn" onclick="setActive(this)">NotebookLM</a>
+        <a href="#part2" class="nav-btn part2" onclick="setActive(this)">חלק ב׳</a>
+        <a href="#workflow" class="nav-btn part2" onclick="setActive(this)">Workflow</a>
+        <a href="#napkin" class="nav-btn part2" onclick="setActive(this)">Napkin AI</a>
+    </div>
+</nav>
+
+<main class="main-content">
+
+    <!-- ========== PART 1 ========== -->
+    <div class="part-header part1" id="part1">
+        <span class="part-label">שעה ראשונה</span>
+        <h2>כתיבה, מחקר וייעול העבודה עם Gemini ו-NotebookLM</h2>
+        <p>שימוש מתקדם ב-Google Gemini בדגש על Canvas, יצירת סוכנים מותאמים אישית (Gems), מחקר מעומק (Deep Research) והיכרות עם NotebookLM.</p>
+    </div>
+
+    <!-- EXERCISE 1: Canvas -->
+    <div class="exercise part1-card open" id="canvas">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">1</div>
+            <div class="exercise-title">
+                <h3>כתיבה ועריכה בסביבת Canvas</h3>
+                <span class="tool-tag">Google Gemini</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    מצב ה-Canvas ב-Gemini מאפשר עריכת מסמכים בחלון צדדי, שליטה טובה יותר בטקסט, והצגת הערות נקודתיות על חלקים ספציפיים. ניתן גם ליצור מצגות ומיני-אפליקציות בתוך הממשק.
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    יצירת טיוטה למסמך מתוך הצעת מחקר או אבסטרקט, ועריכתה.
+                </div>
+
+                <ol class="steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">היכנסו ל-<strong>Google Gemini</strong> וודאו שאתן מחוברות עם חשבון ה-Google שלכן.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content"><strong>הפעלת ה-Canvas:</strong> לפני כתיבת הפרומפט, ודאו שהאפשרות ליצירת מסמכים מופעלת בתוך שורת הצ׳אט.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content"><strong>כתיבת הפרומפט</strong> — השתמשו בתבנית הבאה:</span>
+
+                        <div class="prompt-box">
+                            <button class="copy-btn" onclick="copyPrompt(this)">העתקה</button>
+                            כתוב לי טיוטה ראשונית, בהיקף של כ-200 מילים, לפסקת מבוא עבור הצעת מחקר בנושא: <span class="highlight">[הזינו כאן את נושא המחקר שלכן]</span>.<br><br>
+                            הפסקה צריכה להציג את הרקע לבעיה, את הפער המחקרי ואת מטרת המחקר העיקרית.<br><br>
+                            אנא כתוב בשפה אקדמית, רשמית ומדויקת <span class="highlight">[בחרו: בעברית / באנגלית]</span>.<br><br>
+                            <strong>חשוב: פתח את התשובה בסביבת Canvas כדי שאוכל לערוך אותה.</strong>
+                        </div>
+
+                        <div class="info-box tip">
+                            <strong>&#128161; טיפ</strong>
+                            המשפט האחרון ("פתח את התשובה בסביבת Canvas") אינו חובה, אלא טריק שמעודד את מודל השפה לפתוח את חלונית ה-Canvas באופן אוטומטי.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content">המתינו ש-Gemini ייצר את הטקסט. חלון ה-Canvas ייפתח בצד או במסך מלא.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">5</span>
+                        <span class="step-content"><strong>התנסות בעריכה</strong> — שתי שיטות:</span>
+                        <ul class="sub-steps">
+                            <li><strong>עריכה ישירה:</strong> לחצו על הטקסט בחלונית ה-Canvas, סמנו אותו, וערכו אותו ידנית כמו במסמך Word.</li>
+                            <li><strong>עריכה באמצעות הצ׳אט:</strong> השאירו את ה-Canvas פתוח ובקשו מ-Gemini לבצע שינויים. לדוגמה: "קצר את הפסקה השנייה" או "הוסף משפט פתיחה חזק יותר". ה-AI יעדכן ויסמן את המקומות שערך.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCISE 2: Gems -->
+    <div class="exercise part1-card" id="gems">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">2</div>
+            <div class="exercise-title">
+                <h3>יצירת עוזר מחקר אישי (Gem)</h3>
+                <span class="tool-tag">Google Gemini</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    <strong>למה ליצור Gem?</strong>
+                    Gems הם סוכני בינה מלאכותית מותאמים אישית. הם מועילים ל:<br>
+                    &#8226; <strong>משימות חוזרניות</strong> — פעולות שחוזרות שוב ושוב במחקר<br>
+                    &#8226; <strong>הנגשת ידע</strong> — בניית סוכן המבוסס על ידע ספציפי שניתן לשתף עם קולגות וסטודנטים
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    בניית Gem אישי. הדוגמה מציעה בניית "מבקר עמיתים", אך ניתן לבנות כל Gem בהתאם לצורך.
+                </div>
+
+                <div class="info-box tip">
+                    <strong>&#128161; רעיונות נוספים ל-Gems</strong>
+                    &#8226; סוכן שמקבל מאמר באנגלית ומחלץ משתנים או מתודולוגיה ספציפית<br>
+                    &#8226; סוכן שמקבל מספר מאמרים ומסנתז ביניהם, משווה גישות ומציף פערים
+                </div>
+
+                <ol class="steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">במסך הראשי של Gemini, חפשו בתפריט הצדדי את האפשרות <strong>"Gems"</strong>.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content">לחצו על <strong>"Create a new Gem"</strong> / <strong>Gem חדש</strong>.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content"><strong>הגדרות ה-Gem:</strong></span>
+                        <ul class="sub-steps">
+                            <li><strong>שם (Name):</strong> תנו שם הגיוני שיעזור למצוא את הג׳ם. (דוגמה: מבקר אקדמי אישי)</li>
+                            <li><strong>תיאור (Description):</strong> פנייה למשתמש שמסבירה את מהות הג׳ם. (דוגמה: עוזר לבחינה ביקורתית של פסקאות מחקר וזיהוי חולשות טיעון)</li>
+                            <li><strong>הוראות (Instructions):</strong> הגדרת התפקיד — הוראות אלו נועדות רק לבינה המלאכותית, המשתמש לא רואה אותן.</li>
+                        </ul>
+
+                        <div class="prompt-box">
+                            <button class="copy-btn" onclick="copyPrompt(this)">העתקה</button>
+                            אתה חוקר אקדמי בכיר וקפדן המשמש כסוקר עמיתים עבור כתבי עת מובילים.<br><br>
+                            תפקידך הוא לקרוא פסקאות, תקצירים או רעיונות מחקריים שאני מזינה אליך, ולספק עליהם ביקורת בונה ומעמיקה.<br><br>
+                            עליך לבחון:<br>
+                            1. בהירות הטיעון.<br>
+                            2. ביסוס חסר.<br>
+                            3. כשלים לוגיים.<br><br>
+                            אל תכתוב את הטקסט מחדש, אלא הצע נקודות לשיפור והצבע על נקודות התורפה של הטקסט.
+                        </div>
+
+                        <ul class="sub-steps">
+                            <li><strong>ידע (Knowledge):</strong> העלו קבצים (מהמחשב או מ-Google Drive) להוסיף לג׳ם קונטקסט וידע עולם ספציפי.</li>
+                            <li><strong>כלי ברירת המחדל (Extensions/Tools):</strong> בחרו לאילו כלים הג׳ם יפעיל כברירת מחדל.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content">לחצו על <strong>"Save / שמירה"</strong>. כעת ניתן להתנסות בג׳ם ולראות כיצד הוא מתפקד.</span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCISE 3: Deep Research -->
+    <div class="exercise part1-card" id="deep-research">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">3</div>
+            <div class="exercise-title">
+                <h3>ביצוע מחקר עומק (Deep Research)</h3>
+                <span class="tool-tag">Google Gemini</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    פיצ׳ר ה-Deep Research מאפשר לבקש מהמודל לביצוע חיפוש רשתי מקיף, מעמיק ומרובה שלבים על שאילתה מורכבת.
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    הרצת שאלת מחקר מורכבת לקבלת סקירה ראשונית.
+                </div>
+
+                <ol class="steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">במסך הראשי של Gemini, חפשו והפעילו את מצב <strong>Deep Research</strong> בתוך תיבת הטקסט.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content">שאלו שאלה רחבה הדורשת הצלבת מקורות. לדוגמה:</span>
+
+                        <div class="prompt-box">
+                            <button class="copy-btn" onclick="copyPrompt(this)">העתקה</button>
+                            בצע סקירה של הגישות השונות בספרות בעשור האחרון לגבי שילוב בינה מלאכותית בהערכת סטודנטים באקדמיה. מהם היתרונות, החסרונות, והפערים שעוד לא נחקרו?
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content">שלחו את השאילתה.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content"><strong>שימו לב:</strong> תהליך מחקר עומק לוקח זמן. המערכת תחפש ברשת, תקרא מאמרים ומקורות שונים, ותיצור מסמך מסכם ועשיר במקורות.</span>
+                    </li>
+                </ol>
+
+                <div class="info-box warning">
+                    <strong>&#9888; חשוב לדעת</strong>
+                    Gemini אינו כלי מחקר אקדמי. הוא ימצא מקורות מגוונים (כתבות, אתרים וכו׳) ולא תהיה לו גישה למאמרים מאחורי חומת תשלום. הכלי נועד לקבל התבוננות כללית על תחום ידע.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCISE 4: NotebookLM -->
+    <div class="exercise part1-card" id="notebooklm">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">4</div>
+            <div class="exercise-title">
+                <h3>עבודה עם NotebookLM</h3>
+                <span class="tool-tag">Google NotebookLM</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    NotebookLM מאפשר לעבוד עם מקורות שאתן מעלות — לשאול עליהם שאלות וליצור תוצרים מגוונים.
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    יצירת מחברת חדשה, העלאת מקורות, ויצירת תוצרים שונים.
+                </div>
+
+                <ol class="steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">פתחו את הכלי <strong>NotebookLM</strong>. ודאו שאתן מחוברות דרך חשבון ה-Google שלכן.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content">פתחו <strong>מחברת חדשה</strong>.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content"><strong>העלו מקורות למחברת:</strong> קבצים, קישורים לאתרים או לסרטוני יוטיוב, או הדביקו טקסט. אם קובץ לא מתקבל (למשל Word), המירו אותו ל-PDF.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content">נסו <strong>לשאול שאלה</strong> על המקורות בשורת הצ׳אט.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">5</span>
+                        <span class="step-content">נסו <strong>לייצר תוצרים שונים</strong> (מצגת, אינפוגרפיקה וכו׳). נסו לראות מה קורה כשלוחצים על כפתור העיפרון בתוך כפתורי יצירת החומרים — הוא מאפשר לכתוב הנחיות מותאמות אישית.</span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PART 2 ========== -->
+    <div class="part-header part2" id="part2">
+        <span class="part-label">שעה שנייה</span>
+        <h2>פרקטיקות ליצירת מצגות — מוויזואליזציה להצגה</h2>
+        <p>גישה מעשית ליצירת מצגות בעזרת בינה מלאכותית. התנסויות אלו יוצאות מנקודת הנחה שאתן כבר מכירות עבודה בסיסית עם Gemini ו-NotebookLM.</p>
+    </div>
+
+    <!-- EXERCISE 5: Workflow -->
+    <div class="exercise part2-card" id="workflow">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">1</div>
+            <div class="exercise-title">
+                <h3>ה-Workflow המלא ליצירת מצגת</h3>
+                <span class="tool-tag">Gemini + NotebookLM</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    תהליך של 3 שלבים להמרת ידע אקדמי למצגת מקצועית, תוך צמצום משמעותי של סכנת "הזיות".
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    יצירת מצגת מקצועית מחומרי המחקר שלכן.
+                </div>
+
+                <div class="workflow-stages">
+                    <!-- Stage 1 -->
+                    <div class="workflow-stage">
+                        <div class="stage-label">שלב 1 — טקסט <span class="stage-tool">Gemini</span></div>
+                        <div class="stage-goal">המטרה: יצירת מסמך טקסט מובנה הכולל את התוכן המדויק לכל שקופית.</div>
+                        <ol class="steps">
+                            <li>
+                                <span class="step-content">היכנסו ל-Gemini. הזינו את חומרי המחקר שלכן ובקשו ממנו להכין "שלד למצגת המחולק לשקופיות. אל תיצור את המצגת עדיין, רק כתוב מסמך שמתאר את התוכן של כל שקופית".</span>
+                            </li>
+                            <li>
+                                <span class="step-content">עברו על הטקסט, תקנו אותו, ודאו שהתוכן מדויק ומתאים.</span>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Stage 2 -->
+                    <div class="workflow-stage">
+                        <div class="stage-label">שלב 2 — הנחיות עיצוב <span class="stage-tool">Gemini</span></div>
+                        <div class="stage-goal">המטרה: להפוך את הטקסט להוראות עבור "מעצב".</div>
+                        <p>באותו הצ׳אט ב-Gemini, הזינו את הפרומפט הבא:</p>
+
+                        <div class="prompt-box">
+                            <button class="copy-btn" onclick="copyPrompt(this)">העתקה</button>
+                            קח את שלד המצגת שיצרנו הרגע. צור ממנו הוראות מפורטות למעצב מצגות מקצועי. עבור כל שקופית כתוב בדיוק מה צריך להיות מופיע בה מבחינה ויזואלית. כלול הגדרות של יישור לימין (RTL), הצעות לשפה גרפית אחידה, ואלמנטים ויזואליים המתאימים למחקר. אל תיצור את המצגת — כתוב מסמך טקסט המכיל הנחיות למעצב.
+                        </div>
+
+                        <p>העתיקו את התוצר. מומלץ לייצא אותו כמסמך Docs של Google.</p>
+                    </div>
+
+                    <!-- Stage 3 -->
+                    <div class="workflow-stage">
+                        <div class="stage-label">שלב 3 — ביצוע <span class="stage-tool">NotebookLM</span></div>
+                        <div class="stage-goal">המטרה: יצירת המצגת על בסיס ההנחיות בלבד.</div>
+                        <ol class="steps">
+                            <li>
+                                <span class="step-content">פתחו מחברת ב-NotebookLM.</span>
+                            </li>
+                            <li>
+                                <span class="step-content">העלו למחברת את <strong>"מסמך הוראות העיצוב"</strong> שיצרתן בשלב 2 כקובץ מקור.</span>
+                            </li>
+                            <li>
+                                <span class="step-content">בכפתור יצירת המצגת, לחצו על אפשרות ההגדרות (עיפרון או חץ) וכתבו:</span>
+
+                                <div class="prompt-box">
+                                    <button class="copy-btn" onclick="copyPrompt(this)">העתקה</button>
+                                    המקור שלך הינו הנחיות ליצירת מצגת. עקוב אחריהן באדיקות! אל תמציא שקופיות ואל תוסיף מידע שלא קיים בהנחיות שסיפקתי לך. ייצר את השקופיות בדיוק על פי מסמך המקור. הקפד על יישור מימין לשמאל RTL.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-content">לאחר יצירת המצגת, <strong>השוו אותה</strong> למסמך המקורי ובדקו את רמת ההתאמה.</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCISE 6: Napkin AI -->
+    <div class="exercise part2-card" id="napkin">
+        <div class="exercise-header" onclick="toggleExercise(this)">
+            <div class="exercise-number">2</div>
+            <div class="exercise-title">
+                <h3>מילים לאינפוגרפיקה באמצעות Napkin AI</h3>
+                <span class="tool-tag">Napkin AI</span>
+            </div>
+            <div class="toggle-icon">&#9660;</div>
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-content">
+                <div class="info-box info">
+                    Napkin AI מאפשר הפיכת טקסט לתרשימי זרימה ודיאגרמות — אידיאלי להמחשת תהליכים במחקר.
+                </div>
+
+                <div class="mission-box">
+                    <div class="mission-label">&#127919; המשימה</div>
+                    הפיכת טקסט מחקרי לאינפוגרפיקה ויזואלית.
+                </div>
+
+                <ol class="steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">היכנסו ל-<strong>Napkin AI</strong> ובצעו הרשמה/התחברות.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content">לחצו על כפתור <strong>"New Napkin"</strong> (או Blank Canvas).</span>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content"><strong>בחרו כיצד להוסיף טקסט:</strong></span>
+                        <ul class="sub-steps">
+                            <li><strong>By pasting my text</strong> — הדבקת טקסט קיים</li>
+                            <li><strong>By describing my idea</strong> — תיאור רעיון שה-AI יפתח</li>
+                            <li><strong>By importing a file</strong> — ייבוא קובץ</li>
+                            <li><strong>Blank Napkin</strong> — התחלה מדף חלק</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content">לאחר הוספת טקסט, <strong>סמנו את כל הטקסט</strong> (או חלק ממנו). יופיע סמל קטן של ברק ליד הטקסט המסומן.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">5</span>
+                        <span class="step-content">לחצו על <strong>סמל הברק</strong> (Generate graphic) והמתינו מספר שניות.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">6</span>
+                        <span class="step-content">Napkin יציע מספר אפשרויות. <strong>בחרו את האינפוגרפיקה המתאימה ביותר</strong> להמחשת הרעיון.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">7</span>
+                        <span class="step-content"><strong>עריכה:</strong> לחצו על האינפוגרפיקה כדי לערוך — שינוי צבעים, החלפת סוג תרשים, עריכת טקסט ואייקונים.</span>
+                    </li>
+                    <li>
+                        <span class="step-number">8</span>
+                        <span class="step-content"><strong>הורדה וייצוא:</strong> לחצו על Export ובחרו פורמט:</span>
+                        <div class="format-grid">
+                            <div class="format-item"><span class="format-ext">&#128444;</span> PNG</div>
+                            <div class="format-item"><span class="format-ext">&#128295;</span> SVG</div>
+                            <div class="format-item"><span class="format-ext">&#128196;</span> PDF</div>
+                            <div class="format-item"><span class="format-ext">&#128202;</span> PPT</div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <img src="logo.png" alt="Tom Hagiladi" class="footer-logo">
+    <p>Tom Hagiladi — Empowering through AI</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.6;">
+        &copy; 2026
+    </p>
+</footer>
+
+<script>
+function toggleExercise(header) {
+    const exercise = header.closest('.exercise');
+    exercise.classList.toggle('open');
+}
+
+function setActive(el) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function copyPrompt(btn) {
+    const box = btn.closest('.prompt-box');
+    const text = box.innerText.replace('העתקה', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'הועתק!';
+        setTimeout(() => btn.textContent = 'העתקה', 2000);
+    });
+}
+
+// Intersection Observer for active nav
+const sections = document.querySelectorAll('[id]');
+const navBtns = document.querySelectorAll('.nav-btn');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('href') === '#' + id);
+            });
+        }
+    });
+}, { rootMargin: '-80px 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
