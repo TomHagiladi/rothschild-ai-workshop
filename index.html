@@ -695,6 +695,112 @@
         [id] {
             scroll-margin-top: 70px;
         }
+
+        /* ===== PART SELECTOR (Landing) ===== */
+        .part-selector {
+            max-width: 900px;
+            margin: 2rem auto 3rem;
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+            .part-selector { flex-direction: column; gap: 1rem; padding: 0 1rem; }
+        }
+
+        .part-select-card {
+            flex: 1;
+            max-width: 400px;
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-decoration: none;
+            display: block;
+        }
+
+        .part-select-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .part-select-card.select-part1 {
+            background: linear-gradient(135deg, var(--green-light) 0%, #F0FAF0 100%);
+            border-color: rgba(78, 168, 59, 0.3);
+        }
+
+        .part-select-card.select-part1:hover {
+            border-color: var(--green-primary);
+            box-shadow: 0 8px 30px rgba(78, 168, 59, 0.2);
+        }
+
+        .part-select-card.select-part2 {
+            background: linear-gradient(135deg, var(--red-light) 0%, #FFF5F6 100%);
+            border-color: rgba(155, 27, 48, 0.15);
+        }
+
+        .part-select-card.select-part2:hover {
+            border-color: var(--red-accent);
+            box-shadow: 0 8px 30px rgba(155, 27, 48, 0.15);
+        }
+
+        .part-select-card .select-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .select-part1 .select-label { background: var(--green-primary); }
+        .select-part2 .select-label { background: var(--red-accent); }
+
+        .part-select-card h2 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
+        }
+
+        .part-select-card p {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            line-height: 1.7;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--bg-card);
+            border: 1px solid #E0E0E0;
+            color: var(--gray-medium);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn:hover {
+            background: #F5F5F5;
+            border-color: #CCC;
+        }
+
+        /* Hidden state */
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -717,23 +823,34 @@
     <p><span class="notice-icon">&#9888;</span> <strong>הערה חשובה:</strong> כלי הבינה המלאכותית הם עזרי מחקר רבי עוצמה, אך האחריות הבלעדית על נכונות המידע, אימות המקורות ואיתור וביקורת על הזיות חלה עליכן כחוקרות.</p>
 </div>
 
-<!-- STICKY NAV -->
-<nav class="nav-sticky">
+<!-- PART SELECTOR (Landing) -->
+<div class="part-selector" id="partSelector">
+    <a class="part-select-card select-part1" onclick="showPart('part1')">
+        <span class="select-label">שעה ראשונה</span>
+        <h2>כתיבה, מחקר וייעול העבודה עם Gemini ו-NotebookLM</h2>
+        <p>שימוש מתקדם ב-Google Gemini בדגש על Canvas, יצירת סוכנים מותאמים אישית (Gems), מחקר מעומק (Deep Research) והיכרות עם NotebookLM.</p>
+    </a>
+    <a class="part-select-card select-part2" onclick="showPart('part2')">
+        <span class="select-label">שעה שנייה</span>
+        <h2>פרקטיקות ליצירת מצגות — מוויזואליזציה להצגה</h2>
+        <p>גישה מעשית ליצירת מצגות בעזרת בינה מלאכותית. התנסויות אלו יוצאות מנקודת הנחה שאתן כבר מכירות עבודה בסיסית עם Gemini ו-NotebookLM.</p>
+    </a>
+</div>
+
+<!-- ========== PART 1 CONTENT ========== -->
+<nav class="nav-sticky hidden" id="nav-part1">
     <div class="nav-inner">
-        <a href="#part1" class="nav-btn active" onclick="setActive(this)">חלק א׳</a>
-        <a href="#canvas" class="nav-btn" onclick="setActive(this)">Canvas</a>
+        <a href="#canvas" class="nav-btn active" onclick="setActive(this)">Canvas</a>
         <a href="#gems" class="nav-btn" onclick="setActive(this)">Gems</a>
         <a href="#deep-research" class="nav-btn" onclick="setActive(this)">Deep Research</a>
         <a href="#notebooklm" class="nav-btn" onclick="setActive(this)">NotebookLM</a>
-        <a href="#part2" class="nav-btn part2" onclick="setActive(this)">חלק ב׳</a>
-        <a href="#workflow" class="nav-btn part2" onclick="setActive(this)">Workflow</a>
-        <a href="#napkin" class="nav-btn part2" onclick="setActive(this)">Napkin AI</a>
     </div>
 </nav>
 
-<main class="main-content">
+<main class="main-content hidden" id="content-part1">
 
-    <!-- ========== PART 1 ========== -->
+    <button class="back-btn" onclick="showLanding()">&#8594; חזרה לבחירת חלק</button>
+
     <div class="part-header part1" id="part1">
         <span class="part-label">שעה ראשונה</span>
         <h2>כתיבה, מחקר וייעול העבודה עם Gemini ו-NotebookLM</h2>
@@ -741,7 +858,7 @@
     </div>
 
     <!-- EXERCISE 1: Canvas -->
-    <div class="exercise part1-card open" id="canvas">
+    <div class="exercise part1-card" id="canvas">
         <div class="exercise-header" onclick="toggleExercise(this)">
             <div class="exercise-number">1</div>
             <div class="exercise-title">
@@ -999,7 +1116,20 @@
         </div>
     </div>
 
-    <!-- ========== PART 2 ========== -->
+</main>
+
+<!-- ========== PART 2 CONTENT ========== -->
+<nav class="nav-sticky hidden" id="nav-part2">
+    <div class="nav-inner">
+        <a href="#workflow" class="nav-btn part2 active" onclick="setActive(this)">Workflow</a>
+        <a href="#napkin" class="nav-btn part2" onclick="setActive(this)">Napkin AI</a>
+    </div>
+</nav>
+
+<main class="main-content hidden" id="content-part2">
+
+    <button class="back-btn" onclick="showLanding()">&#8594; חזרה לבחירת חלק</button>
+
     <div class="part-header part2" id="part2">
         <span class="part-label">שעה שנייה</span>
         <h2>פרקטיקות ליצירת מצגות — מוויזואליזציה להצגה</h2>
@@ -1182,7 +1312,8 @@ function toggleExercise(header) {
 }
 
 function setActive(el) {
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const nav = el.closest('.nav-sticky');
+    nav.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
 }
 
@@ -1195,22 +1326,40 @@ function copyPrompt(btn) {
     });
 }
 
-// Intersection Observer for active nav
-const sections = document.querySelectorAll('[id]');
-const navBtns = document.querySelectorAll('.nav-btn');
+function showPart(part) {
+    document.getElementById('partSelector').classList.add('hidden');
+    if (part === 'part1') {
+        document.getElementById('nav-part1').classList.remove('hidden');
+        document.getElementById('content-part1').classList.remove('hidden');
+    } else {
+        document.getElementById('nav-part2').classList.remove('hidden');
+        document.getElementById('content-part2').classList.remove('hidden');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
+function showLanding() {
+    document.getElementById('nav-part1').classList.add('hidden');
+    document.getElementById('content-part1').classList.add('hidden');
+    document.getElementById('nav-part2').classList.add('hidden');
+    document.getElementById('content-part2').classList.add('hidden');
+    document.getElementById('partSelector').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Intersection Observer for active nav (scoped per visible nav)
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const id = entry.target.id;
-            navBtns.forEach(btn => {
+            document.querySelectorAll('.nav-sticky:not(.hidden) .nav-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('href') === '#' + id);
             });
         }
     });
 }, { rootMargin: '-80px 0px -60% 0px' });
 
-sections.forEach(s => observer.observe(s));
+document.querySelectorAll('.exercise[id], .part-header[id]').forEach(s => observer.observe(s));
 </script>
 
 </body>
